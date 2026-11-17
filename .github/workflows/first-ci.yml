@@ -1,0 +1,29 @@
+
+name: Spring Boot Java CI Pipeline
+
+on:
+  push:
+    branches:
+      - Main
+
+  pull_request:
+    branches:
+      - Main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+
+      - name: Build and test with Maven
+        run: mvn clean verify
